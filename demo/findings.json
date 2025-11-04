@@ -1,0 +1,92 @@
+{
+    "findings": [
+      {
+        "rule": "R1",
+        "severity": "HIGH",
+        "title": "iam:PassRole allowed on all resources (*)",
+        "role": "RoleFullExploit",
+        "policy_type": "inline",
+        "policy_name": "PassRoleInline",
+        "statement": {
+          "Effect": "Allow",
+          "Action": "iam:PassRole",
+          "Resource": "*"
+        }
+      },
+      {
+        "rule": "R2",
+        "severity": "MEDIUM",
+        "title": "Admin-style wildcard action on *",
+        "role": "RoleFullExploit",
+        "policy_type": "inline",
+        "policy_name": "ComputeWildcardInline",
+        "statement": {
+          "Effect": "Allow",
+          "Action": "ec2:*",
+          "Resource": "*"
+        }
+      },
+      {
+        "rule": "R1",
+        "severity": "HIGH",
+        "title": "iam:PassRole allowed on all resources (*)",
+        "role": "RolePassRoleManaged",
+        "policy_type": "managed",
+        "policy_arn": "arn:aws:iam::aws:policy/ManagedPassRole",
+        "policy_name": "ManagedPassRole",
+        "statement": {
+          "Effect": "Allow",
+          "Action": "iam:PassRole",
+          "Resource": "*"
+        }
+      },
+      {
+        "rule": "R2",
+        "severity": "HIGH",
+        "title": "Admin-style wildcard action on *",
+        "role": "RoleWildIamManaged",
+        "policy_type": "managed",
+        "policy_arn": "arn:aws:iam::aws:policy/ManagedIamFull",
+        "policy_name": "ManagedIamFull",
+        "statement": {
+          "Effect": "Allow",
+          "Action": "iam:*",
+          "Resource": "*"
+        }
+      },
+      {
+        "rule": "R3",
+        "severity": "HIGH",
+        "title": "Trust allows any AWS principal (*)",
+        "role": "RoleTrustAny",
+        "statement": {
+          "Effect": "Allow",
+          "Principal": { "AWS": "*" },
+          "Action": "sts:AssumeRole"
+        }
+      },
+      {
+        "rule": "R3",
+        "severity": "MEDIUM",
+        "title": "Trust allows entire account root without conditions",
+        "role": "RoleTrustAccountRootNoCond",
+        "statement": {
+          "Effect": "Allow",
+          "Principal": { "AWS": "arn:aws:iam::444444444444:root" },
+          "Action": "sts:AssumeRole"
+        }
+      }
+    ],
+    "summary": {
+      "by_rule": {
+        "R1": 2,
+        "R2": 2,
+        "R3": 2
+      },
+      "by_severity": {
+        "HIGH": 4,
+        "MEDIUM": 2
+      }
+    }
+  }
+  

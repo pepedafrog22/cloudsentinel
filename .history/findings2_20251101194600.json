@@ -1,0 +1,163 @@
+[
+    {
+      "rule": "R1",
+      "severity": "HIGH",
+      "title": "iam:PassRole allowed on all resources (*)",
+      "role": "DevSupportTestRole",
+      "policy_type": "managed",
+      "policy_name": "CloudSentinelDemoPolicy-Dev",
+      "statement": {
+        "Effect": "Allow",
+        "Action": ["iam:PassRole"],
+        "Resource": "*"
+      }
+    },
+    {
+      "rule": "R2",
+      "severity": "HIGH",
+      "title": "Admin-style wildcard action on * (compute launcher)",
+      "role": "DevSupportTestRole",
+      "policy_type": "managed",
+      "policy_name": "CloudSentinelDemoPolicy-Dev",
+      "statement": {
+        "Effect": "Allow",
+        "Action": ["ec2:*"],
+        "Resource": "*"
+      }
+    },
+    {
+      "rule": "R3",
+      "severity": "MEDIUM",
+      "title": "Trust allows entire account root without conditions",
+      "role": "DevSupportTestRole",
+      "statement": {
+        "Effect": "Allow",
+        "Action": "sts:AssumeRole",
+        "Principal": { "AWS": "arn:aws:iam::111122223333:root" },
+        "Condition": {}
+      }
+    },
+  
+    {
+      "rule": "R1",
+      "severity": "HIGH",
+      "title": "iam:PassRole allowed on all resources (*)",
+      "role": "IamOpsRole",
+      "policy_type": "managed",
+      "policy_name": "CloudSentinelDemoPolicy-IAM",
+      "statement": {
+        "Effect": "Allow",
+        "Action": ["iam:PassRole"],
+        "Resource": "*"
+      }
+    },
+    {
+      "rule": "R2",
+      "severity": "HIGH",
+      "title": "Service wildcard (compute launcher)",
+      "role": "IamOpsRole",
+      "policy_type": "managed",
+      "policy_name": "CloudSentinelDemoPolicy-IAM",
+      "statement": {
+        "Effect": "Allow",
+        "Action": ["lambda:*"],
+        "Resource": "*"
+      }
+    },
+    {
+      "rule": "R3",
+      "severity": "MEDIUM",
+      "title": "Trust allows specific cross-account user",
+      "role": "IamOpsRole",
+      "statement": {
+        "Effect": "Allow",
+        "Action": "sts:AssumeRole",
+        "Principal": { "AWS": "arn:aws:iam::048266892734:user/CrossAcctUser" },
+        "Condition": {}
+      }
+    },
+  
+    {
+      "rule": "R1",
+      "severity": "HIGH",
+      "title": "iam:PassRole allowed on all resources (*)",
+      "role": "InfraSupportTestRole",
+      "policy_type": "managed",
+      "policy_name": "CloudSentinelDemoPolicy-Infra",
+      "statement": {
+        "Effect": "Allow",
+        "Action": ["iam:PassRole"],
+        "Resource": "*"
+      }
+    },
+    {
+      "rule": "R2",
+      "severity": "MEDIUM",
+      "title": "Specific launcher action (ecs:RunTask)",
+      "role": "InfraSupportTestRole",
+      "policy_type": "managed",
+      "policy_name": "CloudSentinelDemoPolicy-Infra",
+      "statement": {
+        "Effect": "Allow",
+        "Action": ["ecs:RunTask"],
+        "Resource": "*"
+      }
+    },
+    {
+      "rule": "R3",
+      "severity": "HIGH",
+      "title": "Trust allows everyone (*)",
+      "role": "InfraSupportTestRole",
+      "statement": {
+        "Effect": "Allow",
+        "Action": "sts:AssumeRole",
+        "Principal": { "AWS": "*" },
+        "Condition": {}
+      }
+    },
+  
+    {
+      "rule": "R2",
+      "severity": "MEDIUM",
+      "title": "Generic service wildcard (non-launcher example)",
+      "role": "ReportingRole",
+      "policy_type": "managed",
+      "policy_name": "CloudSentinelDemoPolicy-Reporting",
+      "statement": {
+        "Effect": "Allow",
+        "Action": ["s3:*"],
+        "Resource": "*"
+      }
+    },
+    {
+      "rule": "R3",
+      "severity": "LOW",
+      "title": "Trust allows same-account root",
+      "role": "ReportingRole",
+      "statement": {
+        "Effect": "Allow",
+        "Action": "sts:AssumeRole",
+        "Principal": { "AWS": "arn:aws:iam::048266892734:root" },
+        "Condition": {}
+      }
+    },
+  
+    {
+      "rule": "R3",
+      "severity": "MEDIUM",
+      "title": "Multiple principals can assume role",
+      "role": "DevSupportTestRole",
+      "statement": {
+        "Effect": "Allow",
+        "Action": "sts:AssumeRole",
+        "Principal": {
+          "AWS": [
+            "arn:aws:iam::222233334444:root",
+            "arn:aws:iam::048266892734:role/ExternalAutomation"
+          ]
+        },
+        "Condition": {}
+      }
+    }
+  ]
+  

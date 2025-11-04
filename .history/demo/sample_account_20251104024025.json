@@ -1,0 +1,127 @@
+{
+    "account_id": "222222222222",
+    "collected_at": "2025-10-30T18:30:00Z",
+    "iam": {
+      "users": [],
+      "roles": [
+        {
+          "RoleName": "RoleFullExploit",
+          "AssumeRolePolicyDocument": {
+            "Statement": [
+              {
+                "Effect": "Allow",
+                "Principal": { "AWS": "arn:aws:iam::222222222222:root" },
+                "Action": "sts:AssumeRole"
+              }
+            ]
+          },
+          "AttachedPolicies": [],
+          "InlinePolicies": {
+            "PassRoleInline": {
+              "Statement": [
+                {
+                  "Effect": "Allow",
+                  "Action": "iam:PassRole",
+                  "Resource": "*"
+                }
+              ]
+            },
+            "ComputeWildcardInline": {
+              "Statement": [
+                {
+                  "Effect": "Allow",
+                  "Action": "ec2:*",
+                  "Resource": "*"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "RoleName": "RolePassRoleManaged",
+          "AssumeRolePolicyDocument": {
+            "Statement": [
+              {
+                "Effect": "Allow",
+                "Principal": { "AWS": "arn:aws:iam::333333333333:root" },
+                "Action": "sts:AssumeRole"
+              }
+            ]
+          },
+          "AttachedPolicies": [
+            {
+              "PolicyName": "ManagedPassRole",
+              "PolicyArn": "arn:aws:iam::aws:policy/ManagedPassRole",
+              "PolicyDocument": {
+                "Statement": [
+                  {
+                    "Effect": "Allow",
+                    "Action": "iam:PassRole",
+                    "Resource": "*"
+                  }
+                ]
+              }
+            }
+          ],
+          "InlinePolicies": {}
+        },
+        {
+          "RoleName": "RoleWildIamManaged",
+          "AssumeRolePolicyDocument": {
+            "Statement": [
+              {
+                "Effect": "Allow",
+                "Principal": { "AWS": "*" },
+                "Action": "sts:AssumeRole"
+              }
+            ]
+          },
+          "AttachedPolicies": [
+            {
+              "PolicyName": "ManagedIamFull",
+              "PolicyArn": "arn:aws:iam::aws:policy/ManagedIamFull",
+              "PolicyDocument": {
+                "Statement": [
+                  {
+                    "Effect": "Allow",
+                    "Action": "iam:*",
+                    "Resource": "*"
+                  }
+                ]
+              }
+            }
+          ],
+          "InlinePolicies": {}
+        },
+        {
+          "RoleName": "RoleTrustAny",
+          "AssumeRolePolicyDocument": {
+            "Statement": [
+              {
+                "Effect": "Allow",
+                "Principal": { "AWS": "*" },
+                "Action": "sts:AssumeRole"
+              }
+            ]
+          },
+          "AttachedPolicies": [],
+          "InlinePolicies": {}
+        },
+        {
+          "RoleName": "RoleTrustAccountRootNoCond",
+          "AssumeRolePolicyDocument": {
+            "Statement": [
+              {
+                "Effect": "Allow",
+                "Principal": { "AWS": "arn:aws:iam::444444444444:root" },
+                "Action": "sts:AssumeRole"
+              }
+            ]
+          },
+          "AttachedPolicies": [],
+          "InlinePolicies": {}
+        }
+      ]
+    }
+  }
+  

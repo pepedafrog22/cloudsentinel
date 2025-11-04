@@ -1,0 +1,28 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.env
+.pytest_cache/
+.mypy_cache/
+.cache/
+
+# OS/editor
+.DS_Store
+.idea/
+.vscode/
+
+# Project artifacts
+data/
+# ignore runtime artifacts
+out/ 
+# keep this one demo findings file in git
+
+
+*.log
+
+# If you want to keep demo assets, unignore them:
+# !demo/
+# !demo/*.json
