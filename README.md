@@ -25,3 +25,52 @@ Role trust policy allows Principal: "*", or an entire account :root without cond
 
 Escalation-ready detection
 If a role has PassRole and a launcher capability (e.g., ec2:RunInstances, lambda:CreateFunction, ecs:RunTask, or the service:* wildcard), it’s flagged with a suggested exploit path.
+
+
+HOW TO RUN:
+
+1) Clone the repo:
+
+git clone https://github.com/<your_username>/<repo_name>.git
+cd <repo_name>
+
+
+2) Create a python virtual environment (recommended):
+python3 -m venv .venv
+source .venv/bin/activate     # Windows: .venv\Scripts\activate
+
+
+3) Install requirements:
+
+pip install -r requirements.txt
+
+
+Run in demo mode:
+
+python cloudsentinel.py cloudsentinel --demo demo/sample_account.json --report-out out/report.txt
+
+
+To run in live mode, you need to configure an AWS profile with valid AWS credentials:
+
+1) make sure the AWS CLI is installed:
+aws --version
+
+If the AWS CLI is not installed, follow the steps here: https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html
+
+2) Configure an AWS profile:
+aws configure --profile <profile name>
+
+3) run in live mode:
+python cloudsentinel.py cloudsentinel --profile example_profile --report-out out/report.txt
+
+if you want the output of the JSON data that was created:
+python cloudsentinel.py cloudsentinel --profile example_profile \
+  --snapshot-out data/iam_snapshot.json --findings-out demo/findings.json --report-out out/report.txt
+
+
+
+
+
+
+
+
